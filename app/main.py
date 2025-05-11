@@ -1,7 +1,7 @@
 # app/main.py
 from fastapi import FastAPI
 from model import predict_sentiment
-from app.schemas import TextInput, PredictionResult
+from schemas import TextInput, PredictionResult
 
 app = FastAPI()
 
