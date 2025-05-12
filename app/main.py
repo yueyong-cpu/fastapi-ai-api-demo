@@ -11,8 +11,12 @@ def root():
 
 @app.post("/predict", response_model=PredictionResult)
 def predict(input_data: TextInput):
-    result = predict_sentiment(input_data.text)
-    return {"sentiment": result}
+    try:
+        result = predict_sentiment(input_data.text)
+        return {"sentiment": result}
+    except Exception as e:
+        print(f"🔥 ERROR in /predict: {e}")
+        return {"sentiment": "error"}
 
 if __name__ == "__main__":
     import uvicorn
