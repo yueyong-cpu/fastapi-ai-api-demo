@@ -1,9 +1,13 @@
-# app/main.py
 from fastapi import FastAPI
 from app.model import predict_sentiment
 from app.schemas import TextInput, PredictionResult
 
 app = FastAPI()
+
+# 新增首頁 route，避免 GET / 出現 502 錯誤
+@app.get("/")
+def root():
+    return {"message": "FastAPI sentiment API is running!"}
 
 @app.post("/predict", response_model=PredictionResult)
 def predict(input_data: TextInput):
