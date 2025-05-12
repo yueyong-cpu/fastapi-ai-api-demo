@@ -11,11 +11,12 @@ def root():
 
 @app.post("/predict", response_model=PredictionResult)
 def predict(input_data: TextInput):
+    print("Received text:", input_data.text)  #這行用於debug
     try:
         result = predict_sentiment(input_data.text)
         return {"sentiment": result}
     except Exception as e:
-        print(f"🔥 ERROR in /predict: {e}")
+        print("Error:", str(e))  # 這行會顯示在 Deploy Logs 中
         return {"sentiment": "error"}
 
 if __name__ == "__main__":
